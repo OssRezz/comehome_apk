@@ -1,21 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package comehome_apk;
 
-/**
- *
- * @author james
- */
+import dao.PerfilDao;
+import dto.PerfilDto;
+
 public class Comehome_apk {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        PerfilDto perfilDto = new PerfilDto();
+        PerfilDao perfilDao = new PerfilDao();
+        perfilDao.ListarPerfiles().forEach((perfil) -> {
+        System.out.print(perfil.getId_perfil() + " - ");
+        System.out.println(perfil.getPerfil());
+        });
     }
+
+    /* PERFIL
+        //ingresar perfil
+        String mensaje = perfilDao.inserPerfil("Usuario") ? "Se insertó" : "No se insertó";  
+        System.out.println(mensaje);
     
+        //Listar perfil
+        perfilDao.ListarPerfiles().forEach((perfil) -> {
+        System.out.print(perfil.getId_perfil() + " - ");
+        System.out.println(perfil.getPerfil());
+        });
+     */
 }
