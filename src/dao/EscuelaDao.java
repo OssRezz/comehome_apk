@@ -1,8 +1,7 @@
-
 package dao;
 
 import CONEXION.Conexion;
-import dto.PerfilDto;
+import dto.EscuelaDto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,23 +9,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class PerfilDao {
+public class EscuelaDao {
 
     private Conexion cn = null;
 
-    //Agregar un perfil
-    public boolean insertPerfil(String perfil) {
+    //Insetar escuela
+    public boolean insertEscuela(String escuela) {
         try {
             cn = new Conexion();
-            PreparedStatement ps = cn.conectar().prepareStatement("INSERT INTO"
-                    + " `tbl_perfiles`(`id_perfil`, `perfil`) VALUES (NULL,?)");
+            PreparedStatement ps = cn.conectar().prepareStatement("INSERT INTO "
+                    + "tbl_escuelas (id_escuela,escuela) VALUES (NULL,?)");
 
-            ps.setString(1, perfil);
+            ps.setString(1, escuela);
             ps.execute();
-
-            ps.close();
             cn.conectar().close();
+
             return true;
         } catch (SQLException e) {
             System.out.println(e);
@@ -34,26 +31,30 @@ public class PerfilDao {
         return false;
     }
 
-    //Listar un perfil
-    public List<PerfilDto> ListarPerfiles() {
-        List<PerfilDto> listaDePerfiles = new ArrayList();
-        try {
+    //Lista escuela
+    public List<EscuelaDto> listarEscuelas() {
 
+        List<EscuelaDto> listaDeEscuelas = new ArrayList<>();
+
+        try {
             cn = new Conexion();
             Statement st = cn.conectar().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM tbl_perfiles");
+            ResultSet rs = st.executeQuery("SELECT * FROM tbl_escuelas");
+
             while (rs.next()) {
-                listaDePerfiles.add(new PerfilDto(
-                        rs.getInt("id_perfil"),
-                        rs.getString("perfil")
+                listaDeEscuelas.add(new EscuelaDto(
+                        rs.getInt("id_escuela"),
+                        rs.getString("escuela")
                 ));
             }
+
             rs.close();
             cn.conectar().close();
-            return listaDePerfiles;
+            return listaDeEscuelas;
 
         } catch (SQLException e) {
             System.out.println(e);
+
         }
         return null;
     }
