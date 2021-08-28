@@ -1,24 +1,14 @@
 package comehome_apk;
 
-import dao.EscuelaDao;
-import dao.EventoDao;
-import dao.PerfilDao;
-import dao.ProfesorDao;
-import dao.SedeDao;
-import dao.UsuarioDao;
-import dto.EscuelaDto;
-import dto.EventoDto;
-import dto.PerfilDto;
-import dto.ProfesorDto;
-import dto.SedeDto;
-import dto.UsuarioDto;
+import dao.ClaseDao;
+import dto.ClaseDto;
+import dto.ProgramaDto;
 
 public class Comehome_apk {
 
     public static void main(String[] args) {
-        ProfesorDto profesorDto = new ProfesorDto();
-        ProfesorDao profesorDao = new ProfesorDao();
-
+ 
+        
     }
 
     /* PERFIL
@@ -38,19 +28,19 @@ public class Comehome_apk {
  /* USUARIOS
         UsuarioDto usuarioDto = new UsuarioDto();
         UsuarioDao usuarioDao = new UsuarioDao();
+        PerfilDto perfilDto = new PerfilDto();
     
         //Ingresar usuarios
-        String cedula = "1036957215";
-        String nombre = "James Osorio Florez";
-        String password = "1234";
-        int perfil = 1;
-        usuarioDto.setCedula(cedula);
-        usuarioDto.setNombre(nombre);
-        usuarioDto.setPassword(password);
-        usuarioDto.setPerfil(perfil);
-        if(usuarioDao.insertUsuario(usuarioDto)){
+
+        usuarioDto.setCedula("65423412");
+        usuarioDto.setNombre("Andres Osorio Florez");
+        usuarioDto.setPassword("1234");
+        perfilDto.setId_perfil(4);
+        usuarioDto.setPerfilDto(perfilDto);
+
+        if (usuarioDao.insertUsuario(usuarioDto)) {
             System.out.println("Inserto");
-        } else{
+        } else {
             System.out.println("Fuck");
         }
     
@@ -173,5 +163,116 @@ public class Comehome_apk {
             System.out.print(profesor.getEmail()+ " - ");
             System.out.println(profesor.getTitulo());
         });
-*/
+     */
+ /* GENEROS
+        GeneroDto generoDto = new GeneroDto();
+        GeneroDao generoDao = new GeneroDao();
+        //Ingresar generos
+        String genero = "Desconocido";
+        generoDto.setGenero(genero);
+        
+        if(generoDao.insertGenero(generoDto)){
+            System.out.println("Inserto");
+        } else{
+            System.out.println("Fuck");
+        }
+        //Listar generos
+        generoDao.listarGeneros().forEach((genero) -> {
+        System.out.print(genero.getId_genero()+ " - ");
+        System.out.println(genero.getGenero());
+        });
+     */
+ /* POBLACIONES
+        PoblacionDto poblacionDto = new PoblacionDto();
+        PoblacionDao poblacionDao = new PoblacionDao();
+        //Ingresar poblaciones
+        String genero = "alienígeno";
+        poblacionDto.setPoblacion(genero);
+        
+        if(poblacionDao.insertPoblacion(poblacionDto)){
+            System.out.println("Inserto");
+        } else{
+            System.out.println("Fuck");
+        }
+        //Listar poblaciones
+        poblacionDao.listarPoblaciones().forEach((poblaciones) -> {
+        System.out.print(poblaciones.getId_problacion()+ " - ");
+        System.out.println(poblaciones.getPoblacion());
+        });
+     */
+ /* PROGRAMAS
+        ProgramaDto programaDto = new ProgramaDto();
+        ProgramaDao programaDao = new ProgramaDao();
+        EscuelaDto escuelaDto = new EscuelaDto();
+        SedeDto sedeDto = new SedeDto();
+
+        //ingresar programa
+        escuelaDto.setId_escuela(1);
+        programaDto.setEscuelaDto(escuelaDto);
+
+        programaDto.setNombre("Musica con el pelo");
+        programaDto.setEdad("18");
+
+        sedeDto.setId_sede(1);
+        programaDto.setSedeDto(sedeDto);
+
+        programaDto.setCupos(10);
+        programaDto.setCosto(10000);
+        programaDto.setFechainicio("2019-10-10");
+        programaDto.setFechafin("2019-02-10");
+        programaDto.setHorario("En la noche");
+        programaDto.setEstado(1);
+
+        if (programaDao.insertPrograma(programaDto)) {
+            System.out.println("Nice");
+        } else {
+            System.out.println("Fuck");
+        }
+
+        //Listar programas
+        programaDao.listarProgramas().forEach((programa) -> {
+            System.out.print(programa.getId_programa() + " - ");
+            System.out.print(programa.getEscuelaDto().getEscuela() + " - ");
+            System.out.print(programa.getNombre() + " - ");
+            System.out.print(programa.getEdad() + " - ");
+            System.out.print(programa.getSedeDto().getNombre() + " - ");
+            System.out.print(programa.getCupos() + " - ");
+            System.out.print(programa.getCosto() + " - ");
+            System.out.print(programa.getFechainicio() + " - ");
+            System.out.print(programa.getFechafin() + " - ");
+            System.out.print(programa.getHorario() + " - ");
+            System.out.println(programa.getEstado());
+        });
+     */
+ /* CLASES
+        ClaseDto claseDto = new ClaseDto();
+        ClaseDao claseDao = new ClaseDao();
+        ProgramaDto programaDto = new ProgramaDto();
+        //ingresar clase
+        programaDto.setId_programa(1);
+        claseDto.setProgramaDto(programaDto);
+        
+        claseDto.setGrupo("Ahjab al kabeh");
+        claseDto.setNumeroclases(10);
+        claseDto.setFechainicio("2015-05-04");
+        claseDto.setFechafin("2019-07-20");
+        claseDto.setEstado(1);
+
+        if (claseDao.insertClase(claseDto)) {
+            System.out.println("Nice");
+        } else {
+            System.out.println("Fuck");
+        }
+        //Listar clase
+        claseDao.listarClases().forEach((clase) -> {
+            System.out.print(clase.getId_clase() + " - ");
+            System.out.print(clase.getProgramaDto().getNombre() + " - ");
+            System.out.print(clase.getGrupo() + " - ");
+            System.out.print(clase.getNumeroclases() + " - ");
+            System.out.print(clase.getFechainicio() + " - ");
+            System.out.print(clase.getFechafin() + " - ");
+            System.out.println(clase.getEstado());
+
+        });
+     */
 }

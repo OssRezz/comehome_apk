@@ -17,7 +17,7 @@ public class UsuarioDao {
     private Conexion cn = null;
 
     //Agregar un usuario
-    public boolean insertEvento(UsuarioDto usuarioDto) {
+    public boolean insertUsuario(UsuarioDto usuarioDto) {
         try {
             cn = new Conexion();
             PreparedStatement ps = cn.conectar().prepareStatement("INSERT INTO"
@@ -27,7 +27,7 @@ public class UsuarioDao {
             ps.setString(1, usuarioDto.getCedula());
             ps.setString(2, usuarioDto.getNombre());
             ps.setString(3, usuarioDto.getPassword());
-            ps.setInt(4, usuarioDto.getPerfil());
+            ps.setInt(4, usuarioDto.getPerfilDto().getId_perfil());
 
             ps.execute();
 

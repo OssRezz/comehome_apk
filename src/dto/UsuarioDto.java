@@ -1,30 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dto;
 
-/**
- *
- * @author james
- */
 public class UsuarioDto {
 
     private String cedula;
     private String nombre;
     private String password;
-    private int perfil;
     private PerfilDto perfilDto;
 
     public UsuarioDto() {
-    }
-
-    public UsuarioDto(String cedula, String nombre, String password, int perfil) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.password = password;
-        this.perfil = perfil;
     }
 
     public UsuarioDto(String cedula, String nombre, String password, PerfilDto perfilDto) {
@@ -64,14 +47,6 @@ public class UsuarioDto {
 
     public void setPerfilDto(PerfilDto perfilDto) {
         this.perfilDto = perfilDto;
-    }
-
-    public int getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(int perfil) {
-        this.perfil = perfil;
     }
 
 }
