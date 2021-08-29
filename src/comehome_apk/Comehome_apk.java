@@ -1,15 +1,27 @@
 package comehome_apk;
 
+import dao.AsisestudianteDao;
 import dao.AsisprofeDao;
 import dao.ClaseDao;
+import dao.EstudianteDao;
+import dao.GeneroDao;
+import dao.InscripcionDao;
+import dao.MatriculaDao;
 import dao.PerfilDao;
+import dao.PoblacionDao;
 import dao.ProfesorDao;
 import dao.ProgramaDao;
 import dao.UsuarioDao;
+import dto.AsisestudianteDto;
 import dto.AsisprofeDto;
 import dto.ClaseDto;
 import dto.EscuelaDto;
+import dto.EstudianteDto;
+import dto.GeneroDto;
+import dto.InscripcionDto;
+import dto.MatriculaDto;
 import dto.PerfilDto;
+import dto.PoblacionDto;
 import dto.ProfesorDto;
 import dto.ProgramaDto;
 import dto.SedeDto;
@@ -31,13 +43,25 @@ public class Comehome_apk {
     private static AsisprofeDao asisprofeDao = new AsisprofeDao();
     private static ProfesorDto profesorDto = new ProfesorDto();
     private static ProfesorDao profesorDao = new ProfesorDao();
+    private static GeneroDto generoDto = new GeneroDto();
+    private static GeneroDao generoDao = new GeneroDao();
+    private static PoblacionDto poblacionDto = new PoblacionDto();
+    private static PoblacionDao poblacionDao = new PoblacionDao();
+    private static EstudianteDto estudianteDto = new EstudianteDto();
+    private static EstudianteDao estudianteDao = new EstudianteDao();
+    private static AsisestudianteDto asisestudianteDto = new AsisestudianteDto();
+    private static AsisestudianteDao asisestudianteDao = new AsisestudianteDao();
+    private static InscripcionDto inscripcionDto = new InscripcionDto();
+    private static InscripcionDao inscripcionDao = new InscripcionDao();
+    private static MatriculaDto matriculaDto = new MatriculaDto();
+    private static MatriculaDao matriculaDao = new MatriculaDao();
 
     public static void main(String[] args) {
 
         //ingresarPerfil();
         //listarPerfiles();
         //listarUsuario();
-        //ingresarUsuario("1036545234",2);
+        //ingresarUsuario("1036545234",2); 
         //ingresarProfesor("1036754213","Andres cubijo rodriguez");
         //listarProfesores();
         //listarPrograma();
@@ -45,6 +69,17 @@ public class Comehome_apk {
         //listarClase();
         //insertAsistenciaProfesor("1036754213", 2);
         //listarAsistenciaProfesor();
+        //insertGenero("Ku Klux Klan");
+        //listarGeneros();
+        //insertPoblacion("Poblaciones coloniales");
+        //listarPoblaciones();
+        //insertEstudiante("1036543654", "Valentina valencia");
+        //listarEstudiantes();
+        //insertAsistenciaEstudiante("1036543654", 4);
+        //listarAsistenciaEstudiantes();
+        //insertInscripcion(3, "1036543654");
+        //listarInscripciones();
+        //insertMatricula(1);
     }
 
     public static void ingresarPerfil() {
@@ -197,8 +232,155 @@ public class Comehome_apk {
             System.out.println(asisProfe.getAsistencia());
         });
     }
-    
-    
+
+    public static void insertGenero(String genero) {
+        generoDto.setGenero(genero);
+
+        if (generoDao.insertGenero(generoDto)) {
+            System.out.println("Inserto");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
+    public static void listarGeneros() {
+        generoDao.listarGeneros().forEach((genero) -> {
+            System.out.print(genero.getId_genero() + " - ");
+            System.out.println(genero.getGenero());
+        });
+    }
+
+    public static void insertPoblacion(String poblacion) {
+        //Ingresar poblaciones
+        poblacionDto.setPoblacion(poblacion);
+
+        if (poblacionDao.insertPoblacion(poblacionDto)) {
+            System.out.println("Inserto");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
+    public static void listarPoblaciones() {
+        //Listar poblaciones
+        poblacionDao.listarPoblaciones().forEach((poblaciones) -> {
+            System.out.print(poblaciones.getId_problacion() + " - ");
+            System.out.println(poblaciones.getPoblacion());
+        });
+    }
+
+    public static void insertEstudiante(String cedula, String nombre) {
+
+        //ingresar estudiantes
+        estudianteDto.setCedula(cedula);
+        estudianteDto.setNombre(nombre);
+        estudianteDto.setDireccion("Calle 45 N~ 72-10, Rionegro");
+        estudianteDto.setEmail("Aseo@hotmail.com");
+        estudianteDto.setTelefono("3210952312");
+        estudianteDto.setFechanacimiento("1996-06-15");
+        estudianteDto.setSisben("Categoria A");
+
+        generoDto.setId_genero(1);
+        estudianteDto.setGeneroDto(generoDto);
+
+        poblacionDto.setId_problacion(1);
+        estudianteDto.setPoblacionDto(poblacionDto);
+
+        if (estudianteDao.insertEstudiantes(estudianteDto)) {
+            System.out.println("Nice");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
+    public static void listarEstudiantes() {
+        estudianteDao.listarEstudiantes().forEach((estudiante) -> {
+            System.out.print(estudiante.getCedula() + " - ");
+            System.out.print(estudiante.getNombre() + " - ");
+            System.out.print(estudiante.getDireccion() + " - ");
+            System.out.print(estudiante.getEmail() + " - ");
+            System.out.print(estudiante.getTelefono() + " - ");
+            System.out.print(estudiante.getFechanacimiento() + " - ");
+            System.out.print(estudiante.getSisben() + " - ");
+            System.out.print(estudiante.getGeneroDto().getGenero() + " - ");
+            System.out.println(estudiante.getPoblacionDto().getPoblacion());
+
+        });
+    }
+
+    public static void insertAsistenciaEstudiante(String cedula, int clase) {
+
+        estudianteDto.setCedula(cedula);
+        asisestudianteDto.setEstudianteDto(estudianteDto);
+
+        claseDto.setId_clase(clase);
+        asisestudianteDto.setClaseDto(claseDto);
+
+        asisestudianteDto.setFecha("2020-11-09");
+        asisestudianteDto.setAsistencia(1);
+
+        if (asisestudianteDao.insertAsistenciaEstudiante(asisestudianteDto)) {
+            System.out.println("Inserto");
+        } else {
+            System.out.println("Fuck");
+        }
+
+    }
+
+    public static void listarAsistenciaEstudiantes() {
+
+        asisestudianteDao.listarAsisEstudiantes().forEach((asisEstudiante) -> {
+            System.out.print(asisEstudiante.getEstudianteDto().getCedula() + " - ");
+            System.out.print(asisEstudiante.getEstudianteDto().getNombre() + " - ");
+            System.out.print(asisEstudiante.getClaseDto().getGrupo() + " - ");
+            System.out.print(asisEstudiante.getClaseDto().getNumeroclases() + " - ");
+            System.out.println(asisEstudiante.getAsistencia());
+        });
+
+    }
+
+    public static void insertInscripcion(int programa, String cedula) {
+        estudianteDto.setCedula(cedula);
+        inscripcionDto.setEstudianteDto(estudianteDto);
+
+        programaDto.setId_programa(programa);
+        inscripcionDto.setProgramaDto(programaDto);
+
+        inscripcionDto.setFecha("2021-05-05");
+
+        if (inscripcionDao.insertInscrpcion(inscripcionDto)) {
+            System.out.println("Inserto");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
+    public static void listarInscripciones() {
+
+        inscripcionDao.listarInscripciones().forEach((inscripcion) -> {
+            System.out.print(inscripcion.getId_inscripcion() + " - ");
+            System.out.print(inscripcion.getEstudianteDto().getCedula() + " - ");
+            System.out.print(inscripcion.getEstudianteDto().getNombre() + " - ");
+            System.out.print(inscripcion.getProgramaDto().getNombre() + " - ");
+            System.out.println(inscripcion.getFecha());
+
+        });
+    }
+
+    public static void insertMatricula(int inscripcion) {
+        inscripcionDto.setId_inscripcion(inscripcion);
+        matriculaDto.setInscripcionDto(inscripcionDto);
+        
+        matriculaDto.setValorpago(59000);
+        matriculaDto.setFecha("2021-05-05");
+
+        if (matriculaDao.insertMatricula(matriculaDto)) {
+            System.out.println("Inserto");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
     /* EVENTOS
         EventoDto eventoDto = new EventoDto();
         EventoDao eventoDao = new EventoDao();
@@ -276,42 +458,6 @@ public class Comehome_apk {
             System.out.print(sede.getDireccion()+ " - ");
             System.out.print(sede.getTelefono()+ " - ");
             System.out.println(sede.getAula());
-        });
-     */
- /* GENEROS
-        GeneroDto generoDto = new GeneroDto();
-        GeneroDao generoDao = new GeneroDao();
-        //Ingresar generos
-        String genero = "Desconocido";
-        generoDto.setGenero(genero);
-        
-        if(generoDao.insertGenero(generoDto)){
-            System.out.println("Inserto");
-        } else{
-            System.out.println("Fuck");
-        }
-        //Listar generos
-        generoDao.listarGeneros().forEach((genero) -> {
-        System.out.print(genero.getId_genero()+ " - ");
-        System.out.println(genero.getGenero());
-        });
-     */
- /* POBLACIONES
-        PoblacionDto poblacionDto = new PoblacionDto();
-        PoblacionDao poblacionDao = new PoblacionDao();
-        //Ingresar poblaciones
-        String genero = "alienígeno";
-        poblacionDto.setPoblacion(genero);
-        
-        if(poblacionDao.insertPoblacion(poblacionDto)){
-            System.out.println("Inserto");
-        } else{
-            System.out.println("Fuck");
-        }
-        //Listar poblaciones
-        poblacionDao.listarPoblaciones().forEach((poblaciones) -> {
-        System.out.print(poblaciones.getId_problacion()+ " - ");
-        System.out.println(poblaciones.getPoblacion());
         });
      */
  /* CLASES
