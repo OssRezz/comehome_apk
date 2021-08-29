@@ -44,11 +44,17 @@ public class ClaseDao {
         List<ClaseDto> listaDeClases = new ArrayList();
         try {
             cn = new Conexion();
+
             Statement st = cn.conectar().createStatement();
             ResultSet rs = st.executeQuery("SELECT TC.*, TP.nombre  "
                     + "FROM tbl_clases AS TC "
                     + "INNER JOIN tbl_programas AS TP ON TP.id_programa = TC.id_programa ");
             while (rs.next()) {
+                
+                ProgramaDto programaDto = new ProgramaDto();
+                programaDto.setId_programa(rs.getInt("id_programa"));
+                programaDto.setNombre(rs.getString("nombre"));
+
                 listaDeClases.add(new ClaseDto(
                         rs.getInt("id_clase"),
                         rs.getString("grupo"),
@@ -56,12 +62,10 @@ public class ClaseDao {
                         rs.getString("fechainicio"),
                         rs.getString("fechafin"),
                         rs.getInt("estado"),
-                        new ProgramaDto(
-                                rs.getInt("id_programa"),
-                                rs.getString("nombre")
-                        )
+                        programaDto
                 ));
             }
+
             rs.close();
             cn.conectar().close();
             return listaDeClases;

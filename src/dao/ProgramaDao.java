@@ -50,12 +50,21 @@ public class ProgramaDao {
         List<ProgramaDto> listaDeProgramas = new ArrayList();
         try {
             cn = new Conexion();
+
             Statement st = cn.conectar().createStatement();
             ResultSet rs = st.executeQuery("SELECT TP.*, TS.nombre AS 'nombreSede',"
                     + " TE.escuela FROM tbl_programas as TP"
                     + " INNER JOIN tbl_sedes AS TS ON TS.id_sede = TP.id_sede"
                     + " INNER JOIN tbl_escuelas AS TE ON TE.id_escuela = TP.id_escuela");
             while (rs.next()) {
+                
+                EscuelaDto escuelaDto = new EscuelaDto();
+                SedeDto sedeDto = new SedeDto();
+                escuelaDto.setId_escuela(rs.getInt("id_escuela"));
+                escuelaDto.setEscuela(rs.getString("escuela"));
+                sedeDto.setId_sede(rs.getInt("id_sede"));
+                sedeDto.setNombre(rs.getString("nombreSede"));
+
                 listaDeProgramas.add(new ProgramaDto(
                         rs.getInt("id_programa"),
                         rs.getString("nombre"),
@@ -66,8 +75,7 @@ public class ProgramaDao {
                         rs.getString("fechafin"),
                         rs.getString("horario"),
                         rs.getInt("estado"),
-                        new EscuelaDto(rs.getInt("id_escuela"), rs.getString("escuela")),
-                        new SedeDto(rs.getInt("id_sede"), rs.getString("nombreSede"))
+                        escuelaDto, sedeDto
                 ));
             }
             rs.close();

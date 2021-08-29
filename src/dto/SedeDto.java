@@ -19,11 +19,6 @@ public class SedeDto {
         this.aula = aula;
     }
 
-    public SedeDto(int id_sede, String nombre) {
-        this.id_sede = id_sede;
-        this.nombre = nombre;
-    }
-
     public int getId_sede() {
         return id_sede;
     }

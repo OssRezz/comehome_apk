@@ -1,41 +1,72 @@
 package comehome_apk;
 
+import dao.AsisprofeDao;
 import dao.ClaseDao;
+import dao.PerfilDao;
+import dao.ProfesorDao;
+import dao.ProgramaDao;
+import dao.UsuarioDao;
+import dto.AsisprofeDto;
 import dto.ClaseDto;
+import dto.EscuelaDto;
+import dto.PerfilDto;
+import dto.ProfesorDto;
 import dto.ProgramaDto;
+import dto.SedeDto;
+import dto.UsuarioDto;
 
 public class Comehome_apk {
 
+    private static ProgramaDto programaDto = new ProgramaDto();
+    private static ProgramaDao programaDao = new ProgramaDao();
+    private static EscuelaDto escuelaDto = new EscuelaDto();
+    private static SedeDto sedeDto = new SedeDto();
+    private static ClaseDto claseDto = new ClaseDto();
+    private static ClaseDao claseDao = new ClaseDao();
+    private static UsuarioDto usuarioDto = new UsuarioDto();
+    private static UsuarioDao usuarioDao = new UsuarioDao();
+    private static PerfilDto perfilDto = new PerfilDto();
+    private static PerfilDao perfilDao = new PerfilDao();
+    private static AsisprofeDto asisprofeDto = new AsisprofeDto();
+    private static AsisprofeDao asisprofeDao = new AsisprofeDao();
+    private static ProfesorDto profesorDto = new ProfesorDto();
+    private static ProfesorDao profesorDao = new ProfesorDao();
+
     public static void main(String[] args) {
- 
-        
+
+        //ingresarPerfil();
+        //listarPerfiles();
+        //listarUsuario();
+        //ingresarUsuario("1036545234",2);
+        //ingresarProfesor("1036754213","Andres cubijo rodriguez");
+        //listarProfesores();
+        //listarPrograma();
+        //insertPrograma("nombre");
+        //listarClase();
+        //insertAsistenciaProfesor("1036754213", 2);
+        //listarAsistenciaProfesor();
     }
 
-    /* PERFIL
-        PerfilDto perfilDto = new PerfilDto();
-        PerfilDao perfilDao = new PerfilDao();
-    
-        //ingresar perfil
-        String mensaje = perfilDao.inserPerfil("Usuario") ? "Se insertó" : "No se insertó";  
+    public static void ingresarPerfil() {
+        String mensaje = perfilDao.insertPerfil("Párvulo") ? "Se insertó" : "No se insertó";
         System.out.println(mensaje);
-    
-        //Listar perfil
-        perfilDao.ListarPerfiles().forEach((perfil) -> {
-        System.out.print(perfil.getId_perfil() + " - ");
-        System.out.println(perfil.getPerfil());
-        });
-     */
- /* USUARIOS
-        UsuarioDto usuarioDto = new UsuarioDto();
-        UsuarioDao usuarioDao = new UsuarioDao();
-        PerfilDto perfilDto = new PerfilDto();
-    
-        //Ingresar usuarios
+    }
 
-        usuarioDto.setCedula("65423412");
-        usuarioDto.setNombre("Andres Osorio Florez");
+    public static void listarPerfiles() {
+        perfilDao.ListarPerfiles().forEach((perfil) -> {
+            System.out.print(perfil.getId_perfil() + " - ");
+            System.out.println(perfil.getPerfil());
+        });
+    }
+
+    public static void ingresarUsuario(String cedula, int perfil) {
+
+        //Ingresar usuarios
+        usuarioDto.setCedula(cedula);
+        usuarioDto.setNombre("James Osorio Florez");
+        usuarioDto.setEmail("OssRezz.13@gmail.com");
         usuarioDto.setPassword("1234");
-        perfilDto.setId_perfil(4);
+        perfilDto.setId_perfil(perfil);
         usuarioDto.setPerfilDto(perfilDto);
 
         if (usuarioDao.insertUsuario(usuarioDto)) {
@@ -43,18 +74,132 @@ public class Comehome_apk {
         } else {
             System.out.println("Fuck");
         }
-    
-    
-         //Listar usuarios
+    }
+
+    public static void listarUsuario() {
         usuarioDao.listarUsuarios().forEach((usuario) -> {
             System.out.print(usuario.getCedula() + " - ");
             System.out.print(usuario.getNombre() + " - ");
+            System.out.print(usuario.getEmail() + " - ");
             System.out.print(usuario.getPassword() + " - ");
-            System.out.print(usuario.getPerfilDto().getId_perfil()+ " - ");
+            System.out.print(usuario.getPerfilDto().getId_perfil() + " - ");
             System.out.println(usuario.getPerfilDto().getPerfil());
         });
-     */
- /* EVENTOS
+    }
+
+    public static void ingresarProfesor(String cedula, String nombre) {
+        profesorDto.setCedula(cedula);
+        profesorDto.setNombre(nombre);
+        profesorDto.setTelefono("123445123");
+        profesorDto.setEmail("Jose.16@gmail.com");
+        profesorDto.setTitulo("El que juega con las bolas");
+
+        if (profesorDao.insertProfesor(profesorDto)) {
+            System.out.println("Inserto");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
+    public static void listarProfesores() {
+        //Listar profesores
+        profesorDao.listarProfesores().forEach((profesor) -> {
+            System.out.print(profesor.getCedula() + " - ");
+            System.out.print(profesor.getNombre() + " - ");
+            System.out.print(profesor.getTelefono() + " - ");
+            System.out.print(profesor.getEmail() + " - ");
+            System.out.println(profesor.getTitulo());
+        });
+    }
+
+    public static void listarClase() {
+        claseDao.listarClases().forEach((clase) -> {
+            System.out.print(clase.getId_clase() + " - ");
+            System.out.print(clase.getGrupo() + " - ");
+            System.out.print(clase.getNumeroclases() + " - ");
+            System.out.print(clase.getFechainicio() + " - ");
+            System.out.print(clase.getFechafin() + " - ");
+            System.out.print(clase.getEstado() + " - ");
+            System.out.print(clase.getProgramaDto().getId_programa() + " - ");
+            System.out.println(clase.getProgramaDto().getNombre());
+
+        });
+    }
+
+    public static void insertPrograma(String nombre) {
+
+        //ingresar programa
+        escuelaDto.setId_escuela(1);
+        programaDto.setEscuelaDto(escuelaDto);
+
+        programaDto.setNombre(nombre);
+        programaDto.setEdad("14 a 15");
+
+        sedeDto.setId_sede(1);
+        programaDto.setSedeDto(sedeDto);
+
+        programaDto.setCupos(10);
+        programaDto.setCosto(10000);
+        programaDto.setFechainicio("2014-10-10");
+        programaDto.setFechafin("2015-02-10");
+        programaDto.setHorario("En el dia");
+        programaDto.setEstado(1);
+
+        if (programaDao.insertPrograma(programaDto)) {
+            System.out.println("Nice");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
+    public static void listarPrograma() {
+        programaDao.listarProgramas().forEach((programa) -> {
+            System.out.print(programa.getId_programa() + " - ");
+            System.out.print(programa.getEscuelaDto().getEscuela() + " - ");
+            System.out.print(programa.getNombre() + " - ");
+            System.out.print(programa.getEdad() + " - ");
+            System.out.print(programa.getSedeDto().getNombre() + " - ");
+            System.out.print(programa.getCupos() + " - ");
+            System.out.print(programa.getCosto() + " - ");
+            System.out.print(programa.getFechainicio() + " - ");
+            System.out.print(programa.getFechafin() + " - ");
+            System.out.print(programa.getHorario() + " - ");
+            System.out.println(programa.getEstado());
+        });
+    }
+
+    public static void insertAsistenciaProfesor(String cedula, int clase) {
+
+        profesorDto.setCedula(cedula);
+        asisprofeDto.setProfesorDto(profesorDto);
+
+        claseDto.setId_clase(clase);
+        asisprofeDto.setClaseDto(claseDto);
+
+        asisprofeDto.setFecha("2020-11-09");
+        asisprofeDto.setAsistencia(1);
+
+        if (asisprofeDao.insertAsistenciaProfesor(asisprofeDto)) {
+            System.out.println("Inserto");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
+    public static void listarAsistenciaProfesor() {
+
+        asisprofeDao.listaAsistenciaProfesores().forEach((asisProfe) -> {
+            System.out.print(asisProfe.getProfesorDto().getCedula() + " - ");
+            System.out.print(asisProfe.getProfesorDto().getNombre() + " - ");
+
+            System.out.print(asisProfe.getClaseDto().getGrupo() + " - ");
+            System.out.print(asisProfe.getClaseDto().getNumeroclases() + " - ");
+            System.out.println(asisProfe.getAsistencia());
+        });
+    }
+    
+    
+    /* EVENTOS
         EventoDto eventoDto = new EventoDto();
         EventoDao eventoDao = new EventoDao();
     
@@ -133,37 +278,6 @@ public class Comehome_apk {
             System.out.println(sede.getAula());
         });
      */
- /* PROFESORES
-        ProfesorDto profesorDto = new ProfesorDto();
-        ProfesorDao profesorDao = new ProfesorDao();
-
-        //Ingresar profefsores
-        String cedula = "1036957215";
-        String nombre = "James Osorio Florez";
-        String telefono = "123445123";
-        String email = "OssRezz.13@gmail.com";
-        String titulo = "El que juega con las bolas";
-        profesorDto.setCedula(cedula);
-        profesorDto.setNombre(nombre);
-        profesorDto.setTelefono(telefono);
-        profesorDto.setEmail(email);
-        profesorDto.setTitulo(titulo);
-
-        if (profesorDao.insertProfesor(profesorDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-  
-        //Listar profesores
-        profesorDao.listarProfesores().forEach((profesor) -> {
-            System.out.print(profesor.getCedula()+ " - ");
-            System.out.print(profesor.getNombre()+ " - ");
-            System.out.print(profesor.getTelefono()+ " - ");
-            System.out.print(profesor.getEmail()+ " - ");
-            System.out.println(profesor.getTitulo());
-        });
-     */
  /* GENEROS
         GeneroDto generoDto = new GeneroDto();
         GeneroDao generoDao = new GeneroDao();
@@ -200,50 +314,6 @@ public class Comehome_apk {
         System.out.println(poblaciones.getPoblacion());
         });
      */
- /* PROGRAMAS
-        ProgramaDto programaDto = new ProgramaDto();
-        ProgramaDao programaDao = new ProgramaDao();
-        EscuelaDto escuelaDto = new EscuelaDto();
-        SedeDto sedeDto = new SedeDto();
-
-        //ingresar programa
-        escuelaDto.setId_escuela(1);
-        programaDto.setEscuelaDto(escuelaDto);
-
-        programaDto.setNombre("Musica con el pelo");
-        programaDto.setEdad("18");
-
-        sedeDto.setId_sede(1);
-        programaDto.setSedeDto(sedeDto);
-
-        programaDto.setCupos(10);
-        programaDto.setCosto(10000);
-        programaDto.setFechainicio("2019-10-10");
-        programaDto.setFechafin("2019-02-10");
-        programaDto.setHorario("En la noche");
-        programaDto.setEstado(1);
-
-        if (programaDao.insertPrograma(programaDto)) {
-            System.out.println("Nice");
-        } else {
-            System.out.println("Fuck");
-        }
-
-        //Listar programas
-        programaDao.listarProgramas().forEach((programa) -> {
-            System.out.print(programa.getId_programa() + " - ");
-            System.out.print(programa.getEscuelaDto().getEscuela() + " - ");
-            System.out.print(programa.getNombre() + " - ");
-            System.out.print(programa.getEdad() + " - ");
-            System.out.print(programa.getSedeDto().getNombre() + " - ");
-            System.out.print(programa.getCupos() + " - ");
-            System.out.print(programa.getCosto() + " - ");
-            System.out.print(programa.getFechainicio() + " - ");
-            System.out.print(programa.getFechafin() + " - ");
-            System.out.print(programa.getHorario() + " - ");
-            System.out.println(programa.getEstado());
-        });
-     */
  /* CLASES
         ClaseDto claseDto = new ClaseDto();
         ClaseDao claseDao = new ClaseDao();
@@ -263,16 +333,5 @@ public class Comehome_apk {
         } else {
             System.out.println("Fuck");
         }
-        //Listar clase
-        claseDao.listarClases().forEach((clase) -> {
-            System.out.print(clase.getId_clase() + " - ");
-            System.out.print(clase.getProgramaDto().getNombre() + " - ");
-            System.out.print(clase.getGrupo() + " - ");
-            System.out.print(clase.getNumeroclases() + " - ");
-            System.out.print(clase.getFechainicio() + " - ");
-            System.out.print(clase.getFechafin() + " - ");
-            System.out.println(clase.getEstado());
-
-        });
      */
 }

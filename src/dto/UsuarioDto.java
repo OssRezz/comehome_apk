@@ -4,15 +4,17 @@ public class UsuarioDto {
 
     private String cedula;
     private String nombre;
+    private String email;
     private String password;
     private PerfilDto perfilDto;
 
     public UsuarioDto() {
     }
 
-    public UsuarioDto(String cedula, String nombre, String password, PerfilDto perfilDto) {
+    public UsuarioDto(String cedula, String nombre, String email, String password, PerfilDto perfilDto) {
         this.cedula = cedula;
         this.nombre = nombre;
+        this.email = email;
         this.password = password;
         this.perfilDto = perfilDto;
     }
@@ -31,6 +33,14 @@ public class UsuarioDto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

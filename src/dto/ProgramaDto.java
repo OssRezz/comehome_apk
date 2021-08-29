@@ -31,11 +31,6 @@ public class ProgramaDto {
         this.sedeDto = sedeDto;
     }
 
-    public ProgramaDto(int id_programa, String nombre) {
-        this.id_programa = id_programa;
-        this.nombre = nombre;
-    }
-
     public int getId_programa() {
         return id_programa;
     }
