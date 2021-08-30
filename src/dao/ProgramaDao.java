@@ -55,7 +55,7 @@ public class ProgramaDao {
             ResultSet rs = st.executeQuery("SELECT TP.*, TS.nombre AS 'nombreSede',"
                     + " TE.escuela FROM tbl_programas as TP"
                     + " INNER JOIN tbl_sedes AS TS ON TS.id_sede = TP.id_sede"
-                    + " INNER JOIN tbl_escuelas AS TE ON TE.id_escuela = TP.id_escuela");
+                    + " INNER JOIN tbl_escuelas AS TE ON TE.id_escuela = TP.id_escuela ORDER BY TP.nombre ASC");
             while (rs.next()) {
                 
                 EscuelaDto escuelaDto = new EscuelaDto();
