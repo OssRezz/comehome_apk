@@ -27,7 +27,7 @@ import dto.ProgramaDto;
 import dto.SedeDto;
 import dto.UsuarioDto;
 
-public class Comehome_apk {
+public class main {
 
     private static ProgramaDto programaDto = new ProgramaDto();
     private static ProgramaDao programaDao = new ProgramaDao();
@@ -60,8 +60,8 @@ public class Comehome_apk {
 
         //ingresarPerfil();
         //listarPerfiles();
+        //ingresarUsuario("104357523", 2);
         //listarUsuario();
-        //ingresarUsuario("1036545234",2); 
         //ingresarProfesor("1036754213","Andres cubijo rodriguez");
         //listarProfesores();
         //listarPrograma();
@@ -73,17 +73,18 @@ public class Comehome_apk {
         //listarGeneros();
         //insertPoblacion("Poblaciones coloniales");
         //listarPoblaciones();
-        //insertEstudiante("1036543654", "Valentina valencia");
+        insertEstudiante("10368542134", "Naruto Uzumaki");
         //listarEstudiantes();
         //insertAsistenciaEstudiante("1036543654", 4);
         //listarAsistenciaEstudiantes();
         //insertInscripcion(3, "1036543654");
         //listarInscripciones();
-        //insertMatricula(1);
+        //insertMatricula(2);
+        //listarMatricula();
     }
 
     public static void ingresarPerfil() {
-        String mensaje = perfilDao.insertPerfil("Párvulo") ? "Se insertó" : "No se insertó";
+        String mensaje = perfilDao.insertPerfil("Administrador") ? "Se insertó" : "No se insertó";
         System.out.println(mensaje);
     }
 
@@ -94,10 +95,10 @@ public class Comehome_apk {
         });
     }
 
-    public static void ingresarUsuario(String cedula, int perfil) {
+    public static void ingresarUsuario(String identificacion, int perfil) {
 
         //Ingresar usuarios
-        usuarioDto.setCedula(cedula);
+        usuarioDto.setIdentificacion(identificacion);
         usuarioDto.setNombre("James Osorio Florez");
         usuarioDto.setEmail("OssRezz.13@gmail.com");
         usuarioDto.setPassword("1234");
@@ -113,7 +114,8 @@ public class Comehome_apk {
 
     public static void listarUsuario() {
         usuarioDao.listarUsuarios().forEach((usuario) -> {
-            System.out.print(usuario.getCedula() + " - ");
+            System.out.println(usuario.getCodigo() + " - ");
+            System.out.print(usuario.getIdentificacion() + " - ");
             System.out.print(usuario.getNombre() + " - ");
             System.out.print(usuario.getEmail() + " - ");
             System.out.print(usuario.getPassword() + " - ");
@@ -274,10 +276,10 @@ public class Comehome_apk {
         //ingresar estudiantes
         estudianteDto.setCedula(cedula);
         estudianteDto.setNombre(nombre);
-        estudianteDto.setDireccion("Calle 45 N~ 72-10, Rionegro");
-        estudianteDto.setEmail("Aseo@hotmail.com");
-        estudianteDto.setTelefono("3210952312");
-        estudianteDto.setFechanacimiento("1996-06-15");
+        estudianteDto.setDireccion("Aldea de la hoja");
+        estudianteDto.setEmail("Naruto@gmail.com");
+        estudianteDto.setTelefono("10362312");
+        estudianteDto.setFechanacimiento("1998-06-11");
         estudianteDto.setSisben("Categoria A");
 
         generoDto.setId_genero(1);
@@ -370,7 +372,7 @@ public class Comehome_apk {
     public static void insertMatricula(int inscripcion) {
         inscripcionDto.setId_inscripcion(inscripcion);
         matriculaDto.setInscripcionDto(inscripcionDto);
-        
+
         matriculaDto.setValorpago(59000);
         matriculaDto.setFecha("2021-05-05");
 
@@ -379,6 +381,19 @@ public class Comehome_apk {
         } else {
             System.out.println("Fuck");
         }
+    }
+
+    public static void listarMatricula() {
+        matriculaDao.listarMatriculas().forEach((matricula) -> {
+            System.out.print(matricula.getId_matricula() + " - ");
+            System.out.print(matricula.getValorpago() + " - ");
+            System.out.print(matricula.getFecha() + " - ");
+            System.out.print(matricula.getInscripcionDto().getEstudianteDto().getCedula() + " - ");
+            System.out.print(matricula.getInscripcionDto().getEstudianteDto().getNombre() + " - ");
+            System.out.print(matricula.getInscripcionDto().getProgramaDto().getId_programa() + " - ");
+            System.out.println(matricula.getInscripcionDto().getProgramaDto().getNombre());
+
+        });
     }
 
     /* EVENTOS

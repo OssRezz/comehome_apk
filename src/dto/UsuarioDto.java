@@ -2,7 +2,8 @@ package dto;
 
 public class UsuarioDto {
 
-    private String cedula;
+    private int codigo;
+    private String identificacion;
     private String nombre;
     private String email;
     private String password;
@@ -11,20 +12,29 @@ public class UsuarioDto {
     public UsuarioDto() {
     }
 
-    public UsuarioDto(String cedula, String nombre, String email, String password, PerfilDto perfilDto) {
-        this.cedula = cedula;
+    public UsuarioDto(int codigo, String identificacion, String nombre, String email, String password, PerfilDto perfilDto) {
+        this.codigo = codigo;
+        this.identificacion = identificacion;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.perfilDto = perfilDto;
     }
 
-    public String getCedula() {
-        return cedula;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
     }
 
     public String getNombre() {
