@@ -61,7 +61,10 @@ public class main {
         //ingresarPerfil();
         //listarPerfiles();
         //ingresarUsuario("104357523", 2);
+        //actualizarUsuario();
+        //eliminarUsuario(1011);
         //listarUsuario();
+        //listarUsuarioById(1000);
         //ingresarProfesor("1036754213","Andres cubijo rodriguez");
         //listarProfesores();
         //listarPrograma();
@@ -73,7 +76,7 @@ public class main {
         //listarGeneros();
         //insertPoblacion("Poblaciones coloniales");
         //listarPoblaciones();
-        insertEstudiante("10368542134", "Naruto Uzumaki");
+        //insertEstudiante("10368542134", "Naruto Uzumaki");
         //listarEstudiantes();
         //insertAsistenciaEstudiante("1036543654", 4);
         //listarAsistenciaEstudiantes();
@@ -112,8 +115,45 @@ public class main {
         }
     }
 
+    public static void actualizarUsuario() {
+        //Ingresar usuarios
+        usuarioDto.setCodigo(1000);
+        usuarioDto.setIdentificacion("1036545234");
+        usuarioDto.setNombre("Camila Andres Ruedas Toro");
+        usuarioDto.setEmail("Galeria.10@gmail.com");
+        usuarioDto.setPassword("1234");
+        perfilDto.setId_perfil(2);
+        usuarioDto.setPerfilDto(perfilDto);
+
+        if (usuarioDao.actualizarUsuario(usuarioDto)) {
+            System.out.println("Actualizo");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
+    public static void eliminarUsuario(int codigo) {
+        if (usuarioDao.eliminarUsuario(codigo)) {
+            System.out.println("Elimino");
+        } else {
+            System.out.println("Fuck");
+        }
+    }
+
     public static void listarUsuario() {
         usuarioDao.listarUsuarios().forEach((usuario) -> {
+            System.out.println(usuario.getCodigo() + " - ");
+            System.out.print(usuario.getIdentificacion() + " - ");
+            System.out.print(usuario.getNombre() + " - ");
+            System.out.print(usuario.getEmail() + " - ");
+            System.out.print(usuario.getPassword() + " - ");
+            System.out.print(usuario.getPerfilDto().getId_perfil() + " - ");
+            System.out.println(usuario.getPerfilDto().getPerfil());
+        });
+    }
+
+    public static void listarUsuarioById(int codigo) {
+        usuarioDao.listarUsuariosById(codigo).forEach((usuario) -> {
             System.out.println(usuario.getCodigo() + " - ");
             System.out.print(usuario.getIdentificacion() + " - ");
             System.out.print(usuario.getNombre() + " - ");
