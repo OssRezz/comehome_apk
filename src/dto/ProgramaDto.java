@@ -6,7 +6,7 @@ public class ProgramaDto {
     private String nombre;
     private String edad;
     private int cupos;
-    private float costo;
+    private double costo;
     private String fechainicio;
     private String fechafin;
     private String horario;
@@ -17,7 +17,7 @@ public class ProgramaDto {
     public ProgramaDto() {
     }
 
-    public ProgramaDto(int id_programa, String nombre, String edad, int cupos, float costo, String fechainicio, String fechafin, String horario, int estado, EscuelaDto escuelaDto, SedeDto sedeDto) {
+    public ProgramaDto(int id_programa, String nombre, String edad, int cupos, double costo, String fechainicio, String fechafin, String horario, int estado, EscuelaDto escuelaDto, SedeDto sedeDto) {
         this.id_programa = id_programa;
         this.nombre = nombre;
         this.edad = edad;
@@ -63,11 +63,11 @@ public class ProgramaDto {
         this.cupos = cupos;
     }
 
-    public float getCosto() {
+    public double getCosto() {
         return costo;
     }
 
-    public void setCosto(float costo) {
+    public void setCosto(double costo) {
         this.costo = costo;
     }
 

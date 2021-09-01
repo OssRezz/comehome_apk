@@ -63,7 +63,7 @@ public class main {
         //ingresarUsuario("104357523", 2);
         //actualizarUsuario();
         //eliminarUsuario(1011);
-        //listarUsuario();
+       //listarUsuario();
         //listarUsuarioById(1000);
         //ingresarProfesor("1036754213","Andres cubijo rodriguez");
         //listarProfesores();

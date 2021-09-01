@@ -99,6 +99,37 @@ public class SedeDao {
         return null;
     }
 
+    //Lista de sedes por id
+    public List<SedeDto> listarSedesUpdate(int sede) {
+
+        List<SedeDto> listaOrderSede = new ArrayList<>();
+
+        try {
+            cn = new Conexion();
+            Statement st = cn.conectar().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM tbl_sedes WHERE id_sede ORDER BY " + sede);
+            while (rs.next()) {
+                listaOrderSede.add(new SedeDto(
+                        rs.getInt("id_sede"),
+                        rs.getString("nombre"),
+                        rs.getString("direccion"),
+                        rs.getString("telefono"),
+                        rs.getString("aula")
+                ));
+            }
+
+            rs.close();
+            cn.conectar().close();
+            return listaOrderSede;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+
+        }
+        return null;
+    }
+    
+
     public boolean actualizarSede(SedeDto sedeDto) {
         try {
             cn = new Conexion();

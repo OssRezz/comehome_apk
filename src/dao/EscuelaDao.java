@@ -59,4 +59,32 @@ public class EscuelaDao {
         return null;
     }
 
+    //Lista escuela
+    public List<EscuelaDto> listarEscuelasUpdate(int escuela) {
+
+        List<EscuelaDto> listaDeEscuelas = new ArrayList<>();
+
+        try {
+            cn = new Conexion();
+            Statement st = cn.conectar().createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM tbl_escuelas ORDER BY " + escuela);
+
+            while (rs.next()) {
+                listaDeEscuelas.add(new EscuelaDto(
+                        rs.getInt("id_escuela"),
+                        rs.getString("escuela")
+                ));
+            }
+
+            rs.close();
+            cn.conectar().close();
+            return listaDeEscuelas;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+
+        }
+        return null;
+    }
+
 }
