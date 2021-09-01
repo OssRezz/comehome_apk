@@ -27,6 +27,7 @@ public class SedeDao {
             ps.setString(4, sedeDto.getAula());
 
             ps.execute();
+            ps.close();
             cn.conectar().close();
 
             return true;

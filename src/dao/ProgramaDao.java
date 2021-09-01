@@ -78,8 +78,6 @@ public class ProgramaDao {
                         escuelaDto, sedeDto
                 ));
             }
-            rs.close();
-            cn.conectar().close();
             return listaDeProgramas;
 
         } catch (SQLException e) {
@@ -88,46 +86,46 @@ public class ProgramaDao {
         return null;
     }
 
-//    public List<ProgramaDto> listarProgramasById(int programa) {
-//        List<ProgramaDto> listaDeUnPrograma = new ArrayList();
-//        try {
-//            cn = new Conexion();
-//
-//            Statement st = cn.conectar().createStatement();
-//            ResultSet rs = st.executeQuery("SELECT TP.*, TS.nombre AS 'nombreSede',"
-//                    + " TE.escuela FROM tbl_programas as TP"
-//                    + " INNER JOIN tbl_sedes AS TS ON TS.id_sede = TP.id_sede"
-//                    + " INNER JOIN tbl_escuelas AS TE ON TE.id_escuela = TP.id_escuela "
-//                    + " WHERE id_programa='" + programa + "' LIMIT 1");
-//            while (rs.next()) {
-//
-//                EscuelaDto escuelaDto = new EscuelaDto();
-//                SedeDto sedeDto = new SedeDto();
-//                escuelaDto.setId_escuela(rs.getInt("id_escuela"));
-//                escuelaDto.setEscuela(rs.getString("escuela"));
-//                sedeDto.setId_sede(rs.getInt("id_sede"));
-//                sedeDto.setNombre(rs.getString("nombreSede"));
-//
-//                listaDeUnPrograma.add(new ProgramaDto(
-//                        rs.getInt("id_programa"),
-//                        rs.getString("nombre"),
-//                        rs.getString("edad"),
-//                        rs.getInt("cupos"),
-//                        rs.getDouble("costo"),
-//                        rs.getString("fechainicio"),
-//                        rs.getString("fechafin"),
-//                        rs.getString("horario"),
-//                        rs.getInt("estado"),
-//                        escuelaDto, sedeDto
-//                ));
-//            }
-//            rs.close();
-//            cn.conectar().close();
-//            return listaDeUnPrograma;
-//
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return null;
-//    }
+    public List<ProgramaDto> listarProgramasById(int programa) {
+        List<ProgramaDto> listaDeUnPrograma = new ArrayList();
+        try {
+            cn = new Conexion();
+
+            Statement st = cn.conectar().createStatement();
+            ResultSet rs = st.executeQuery("SELECT TP.*, TS.nombre AS 'nombreSede',"
+                    + " TE.escuela FROM tbl_programas as TP"
+                    + " INNER JOIN tbl_sedes AS TS ON TS.id_sede = TP.id_sede"
+                    + " INNER JOIN tbl_escuelas AS TE ON TE.id_escuela = TP.id_escuela "
+                    + " WHERE id_programa='" + programa + "' LIMIT 1");
+            while (rs.next()) {
+
+                EscuelaDto escuelaDto = new EscuelaDto();
+                SedeDto sedeDto = new SedeDto();
+                escuelaDto.setId_escuela(rs.getInt("id_escuela"));
+                escuelaDto.setEscuela(rs.getString("escuela"));
+                sedeDto.setId_sede(rs.getInt("id_sede"));
+                sedeDto.setNombre(rs.getString("nombreSede"));
+
+                listaDeUnPrograma.add(new ProgramaDto(
+                        rs.getInt("id_programa"),
+                        rs.getString("nombre"),
+                        rs.getString("edad"),
+                        rs.getInt("cupos"),
+                        rs.getDouble("costo"),
+                        rs.getString("fechainicio"),
+                        rs.getString("fechafin"),
+                        rs.getString("horario"),
+                        rs.getInt("estado"),
+                        escuelaDto, sedeDto
+                ));
+            }
+            rs.close();
+            cn.conectar().close();
+            return listaDeUnPrograma;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }

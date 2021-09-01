@@ -67,7 +67,7 @@ public class main {
         //listarUsuarioById(1000);
         //ingresarProfesor("1036754213","Andres cubijo rodriguez");
         //listarProfesores();
-        //listarPrograma();
+        listarPrograma();
         //insertPrograma("nombre");
         //listarClase();
         //insertAsistenciaProfesor("1036754213", 2);
