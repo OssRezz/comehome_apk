@@ -11,12 +11,10 @@ import java.util.List;
 
 public class SedeDao {
 
-    private Conexion cn = null;
-
     //Insetar escuela
     public boolean insertSede(SedeDto sedeDto) {
         try {
-            cn = new Conexion();
+            Conexion cn = new Conexion();
             PreparedStatement ps = cn.conectar().prepareStatement("INSERT INTO"
                     + " `tbl_sedes`(`id_sede`, `nombre`, `direccion`, `telefono`, `aula`)"
                     + " VALUES (NULL,?,?,?,?)");
@@ -43,7 +41,7 @@ public class SedeDao {
         List<SedeDto> listaDeSedes = new ArrayList<>();
 
         try {
-            cn = new Conexion();
+            Conexion cn = new Conexion();
             Statement st = cn.conectar().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM tbl_sedes");
 
@@ -56,42 +54,38 @@ public class SedeDao {
                         rs.getString("aula")
                 ));
             }
-
+            st.close();
             rs.close();
             cn.conectar().close();
             return listaDeSedes;
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("Error listarSedes" + e);
 
         }
         return null;
     }
 
     //Lista de sedes por id
-    public List<SedeDto> listarSedesById(int sede) {
-
-        List<SedeDto> listaDeUnaSede = new ArrayList<>();
-
+    public SedeDto MostrarSedeById(int sede) {
         try {
-            cn = new Conexion();
+            Conexion cn = new Conexion();
             Statement st = cn.conectar().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM tbl_sedes"
-                    + " WHERE id_sede=" + sede + " LIMIT 1");
+                    + " WHERE id_sede=" + sede);
 
-            while (rs.next()) {
-                listaDeUnaSede.add(new SedeDto(
-                        rs.getInt("id_sede"),
-                        rs.getString("nombre"),
-                        rs.getString("direccion"),
-                        rs.getString("telefono"),
-                        rs.getString("aula")
-                ));
-            }
-
+            rs.next();
+            SedeDto sedeDto = new SedeDto(
+                    rs.getInt("id_sede"),
+                    rs.getString("nombre"),
+                    rs.getString("direccion"),
+                    rs.getString("telefono"),
+                    rs.getString("aula")
+            );
+            st.close();
             rs.close();
             cn.conectar().close();
-            return listaDeUnaSede;
+            return sedeDto;
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -99,41 +93,10 @@ public class SedeDao {
         }
         return null;
     }
-
-    //Lista de sedes por id
-    public List<SedeDto> listarSedesUpdate(int sede) {
-
-        List<SedeDto> listaOrderSede = new ArrayList<>();
-
-        try {
-            cn = new Conexion();
-            Statement st = cn.conectar().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM tbl_sedes WHERE id_sede ORDER BY " + sede);
-            while (rs.next()) {
-                listaOrderSede.add(new SedeDto(
-                        rs.getInt("id_sede"),
-                        rs.getString("nombre"),
-                        rs.getString("direccion"),
-                        rs.getString("telefono"),
-                        rs.getString("aula")
-                ));
-            }
-
-            rs.close();
-            cn.conectar().close();
-            return listaOrderSede;
-
-        } catch (SQLException e) {
-            System.out.println(e);
-
-        }
-        return null;
-    }
-    
 
     public boolean actualizarSede(SedeDto sedeDto) {
         try {
-            cn = new Conexion();
+            Conexion cn = new Conexion();
             PreparedStatement ps = cn.conectar().prepareStatement("UPDATE `tbl_sedes`"
                     + " SET `id_sede`='" + sedeDto.getId_sede() + "',"
                     + "`nombre`='" + sedeDto.getNombre() + "',"
@@ -143,6 +106,8 @@ public class SedeDao {
                     + " WHERE id_sede=" + sedeDto.getId_sede());
 
             ps.executeUpdate();
+            ps.close();
+            cn.conectar().close();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -152,11 +117,13 @@ public class SedeDao {
 
     public boolean eliminarSede(int sede) {
         try {
-            cn = new Conexion();
+            Conexion cn = new Conexion();
             PreparedStatement ps = cn.conectar().prepareStatement("DELETE * "
                     + "FROM tbl_sedes WHERE id_sede" + sede);
 
             ps.executeUpdate();
+            ps.close();
+            cn.conectar().close();
             return true;
         } catch (SQLException e) {
             System.err.println(e);

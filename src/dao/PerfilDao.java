@@ -1,4 +1,3 @@
-
 package dao;
 
 import CONEXION.Conexion;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class PerfilDao {
 
@@ -42,28 +40,6 @@ public class PerfilDao {
             cn = new Conexion();
             Statement st = cn.conectar().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM tbl_perfiles");
-            while (rs.next()) {
-                listaDePerfiles.add(new PerfilDto(
-                        rs.getInt("id_perfil"),
-                        rs.getString("perfil")
-                ));
-            }
-            rs.close();
-            cn.conectar().close();
-            return listaDePerfiles;
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-    
-        public List<PerfilDto> ListarPerfilesUpdate(int perfil) {
-        List<PerfilDto> listaDePerfiles = new ArrayList();
-        try {
-            cn = new Conexion();
-            Statement st = cn.conectar().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM tbl_perfiles ORDER BY "+perfil);
             while (rs.next()) {
                 listaDePerfiles.add(new PerfilDto(
                         rs.getInt("id_perfil"),

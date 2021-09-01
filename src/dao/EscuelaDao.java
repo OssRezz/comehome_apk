@@ -11,17 +11,19 @@ import java.util.List;
 
 public class EscuelaDao {
 
-    private Conexion cn = null;
+    
 
     //Insetar escuela
     public boolean insertEscuela(String escuela) {
         try {
-            cn = new Conexion();
+            Conexion cn = new Conexion();
             PreparedStatement ps = cn.conectar().prepareStatement("INSERT INTO "
                     + "tbl_escuelas (id_escuela,escuela) VALUES (NULL,?)");
 
             ps.setString(1, escuela);
+
             ps.execute();
+            ps.close();
             cn.conectar().close();
 
             return true;
@@ -37,7 +39,7 @@ public class EscuelaDao {
         List<EscuelaDto> listaDeEscuelas = new ArrayList<>();
 
         try {
-            cn = new Conexion();
+            Conexion cn = new Conexion();
             Statement st = cn.conectar().createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM tbl_escuelas");
 
@@ -49,6 +51,7 @@ public class EscuelaDao {
             }
 
             rs.close();
+            st.close();
             cn.conectar().close();
             return listaDeEscuelas;
 
@@ -59,32 +62,5 @@ public class EscuelaDao {
         return null;
     }
 
-    //Lista escuela
-    public List<EscuelaDto> listarEscuelasUpdate(int escuela) {
-
-        List<EscuelaDto> listaDeEscuelas = new ArrayList<>();
-
-        try {
-            cn = new Conexion();
-            Statement st = cn.conectar().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM tbl_escuelas ORDER BY " + escuela);
-
-            while (rs.next()) {
-                listaDeEscuelas.add(new EscuelaDto(
-                        rs.getInt("id_escuela"),
-                        rs.getString("escuela")
-                ));
-            }
-
-            rs.close();
-            cn.conectar().close();
-            return listaDeEscuelas;
-
-        } catch (SQLException e) {
-            System.out.println(e);
-
-        }
-        return null;
-    }
 
 }

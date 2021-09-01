@@ -63,7 +63,7 @@ public class main {
         //ingresarUsuario("104357523", 2);
         //actualizarUsuario();
         //eliminarUsuario(1011);
-       //listarUsuario();
+        //listarUsuario();
         //listarUsuarioById(1000);
         //ingresarProfesor("1036754213","Andres cubijo rodriguez");
         //listarProfesores();
@@ -153,15 +153,14 @@ public class main {
     }
 
     public static void listarUsuarioById(int codigo) {
-        usuarioDao.listarUsuariosById(codigo).forEach((usuario) -> {
-            System.out.println(usuario.getCodigo() + " - ");
-            System.out.print(usuario.getIdentificacion() + " - ");
-            System.out.print(usuario.getNombre() + " - ");
-            System.out.print(usuario.getEmail() + " - ");
-            System.out.print(usuario.getPassword() + " - ");
-            System.out.print(usuario.getPerfilDto().getId_perfil() + " - ");
-            System.out.println(usuario.getPerfilDto().getPerfil());
-        });
+        System.out.println(usuarioDao.MostrarUsuarioById(codigo).getCodigo() + " - ");
+        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getIdentificacion() + " - ");
+        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getNombre() + " - ");
+        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getEmail() + " - ");
+        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getPassword() + " - ");
+        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getPerfilDto().getId_perfil() + " - ");
+        System.out.println(usuarioDao.MostrarUsuarioById(codigo).getPerfilDto().getPerfil());
+
     }
 
     public static void ingresarProfesor(String cedula, String nombre) {
