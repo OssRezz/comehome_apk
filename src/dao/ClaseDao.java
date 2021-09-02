@@ -65,8 +65,9 @@ public class ClaseDao {
                         programaDto
                 ));
             }
-
+            
             rs.close();
+            st.close();            
             cn.conectar().close();
             return listaDeClases;
         } catch (SQLException e) {
