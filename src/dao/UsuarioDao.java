@@ -66,9 +66,10 @@ public class UsuarioDao {
                         perfilDto
                 ));
             }
-
-            st.close();
+            
             rs.close();
+            st.close();
+
             cn.conectar().close();
             return listaDeUsuarios;
 
@@ -96,7 +97,7 @@ public class UsuarioDao {
             perfilDto.setId_perfil(rs.getInt("id_perfil"));
             perfilDto.setPerfil(rs.getString("perfil"));
 
-            UsuarioDto  usuarioDto = new UsuarioDto(
+            UsuarioDto usuarioDto = new UsuarioDto(
                     rs.getInt("codigo"),
                     rs.getString("identificacion"),
                     rs.getString("nombre"),
@@ -105,8 +106,9 @@ public class UsuarioDao {
                     perfilDto
             );
 
-            st.close();
             rs.close();
+            st.close();
+
             cn.conectar().close();
             return usuarioDto;
 

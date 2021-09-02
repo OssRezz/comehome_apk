@@ -76,8 +76,9 @@ public class ProgramaDao {
                         escuelaDto, sedeDto
                 ));
             }
-            st.close();
             rs.close();
+            st.close();
+
             cn.conectar().close();
             return listaDeProgramas;
 
@@ -118,14 +119,43 @@ public class ProgramaDao {
                     escuelaDto, sedeDto
             );
 
-            st.close();
             rs.close();
+            st.close();
             cn.conectar().close();
+
             return programaDto;
 
         } catch (SQLException e) {
-            System.out.println("Error mosstrarUnUsuario" + e);
+            System.out.println("Error mostrar un programa" + e);
         }
         return null;
+    }
+
+    public boolean actualizarPrograma(ProgramaDto programaDto) {
+        try {
+            Conexion cn = new Conexion();
+            PreparedStatement ps = cn.conectar().prepareStatement("UPDATE `tbl_programas`"
+                    + " SET `id_programa`='" + programaDto.getId_programa() + "',"
+                    + "`id_escuela`='" + programaDto.getEscuelaDto().getId_escuela() + "',"
+                    + "`nombre`='" + programaDto.getNombre() + "',"
+                    + "`edad`='" + programaDto.getEdad() + "',"
+                    + "`id_sede`='" + programaDto.getSedeDto().getId_sede() + "',"
+                    + "`cupos`='" + programaDto.getCupos() + "',"
+                    + "`costo`='" + programaDto.getCosto() + "',"
+                    + "`fechainicio`='" + programaDto.getFechainicio() + "',"
+                    + "`fechafin`='" + programaDto.getFechafin() + "',"
+                    + "`horario`='" + programaDto.getHorario() + "',"
+                    + "`estado`='" + programaDto.getEstado() + "'"
+                    + "  WHERE id_programa=" + programaDto.getId_programa());
+
+            ps.executeUpdate();
+            ps.close();
+            cn.conectar().close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error actualizar programa" + e);
+        }
+        return false;
     }
 }

@@ -54,8 +54,9 @@ public class SedeDao {
                         rs.getString("aula")
                 ));
             }
-            st.close();
             rs.close();
+            st.close();
+
             cn.conectar().close();
             return listaDeSedes;
 
@@ -82,8 +83,9 @@ public class SedeDao {
                     rs.getString("telefono"),
                     rs.getString("aula")
             );
-            st.close();
             rs.close();
+            st.close();
+
             cn.conectar().close();
             return sedeDto;
 

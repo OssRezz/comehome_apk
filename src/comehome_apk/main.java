@@ -67,7 +67,7 @@ public class main {
         //listarUsuarioById(1000);
         //ingresarProfesor("1036754213","Andres cubijo rodriguez");
         //listarProfesores();
-        listarPrograma();
+        //listarPrograma();
         //insertPrograma("nombre");
         //listarClase();
         //insertAsistenciaProfesor("1036754213", 2);
@@ -86,354 +86,354 @@ public class main {
         //listarMatricula();
     }
 
-    public static void ingresarPerfil() {
-        String mensaje = perfilDao.insertPerfil("Administrador") ? "Se insertó" : "No se insertó";
-        System.out.println(mensaje);
-    }
-
-    public static void listarPerfiles() {
-        perfilDao.ListarPerfiles().forEach((perfil) -> {
-            System.out.print(perfil.getId_perfil() + " - ");
-            System.out.println(perfil.getPerfil());
-        });
-    }
-
-    public static void ingresarUsuario(String identificacion, int perfil) {
-
-        //Ingresar usuarios
-        usuarioDto.setIdentificacion(identificacion);
-        usuarioDto.setNombre("James Osorio Florez");
-        usuarioDto.setEmail("OssRezz.13@gmail.com");
-        usuarioDto.setPassword("1234");
-        perfilDto.setId_perfil(perfil);
-        usuarioDto.setPerfilDto(perfilDto);
-
-        if (usuarioDao.insertUsuario(usuarioDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void actualizarUsuario() {
-        //Ingresar usuarios
-        usuarioDto.setCodigo(1000);
-        usuarioDto.setIdentificacion("1036545234");
-        usuarioDto.setNombre("Camila Andres Ruedas Toro");
-        usuarioDto.setEmail("Galeria.10@gmail.com");
-        usuarioDto.setPassword("1234");
-        perfilDto.setId_perfil(2);
-        usuarioDto.setPerfilDto(perfilDto);
-
-        if (usuarioDao.actualizarUsuario(usuarioDto)) {
-            System.out.println("Actualizo");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void eliminarUsuario(int codigo) {
-        if (usuarioDao.eliminarUsuario(codigo)) {
-            System.out.println("Elimino");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarUsuario() {
-        usuarioDao.listarUsuarios().forEach((usuario) -> {
-            System.out.println(usuario.getCodigo() + " - ");
-            System.out.print(usuario.getIdentificacion() + " - ");
-            System.out.print(usuario.getNombre() + " - ");
-            System.out.print(usuario.getEmail() + " - ");
-            System.out.print(usuario.getPassword() + " - ");
-            System.out.print(usuario.getPerfilDto().getId_perfil() + " - ");
-            System.out.println(usuario.getPerfilDto().getPerfil());
-        });
-    }
-
-    public static void listarUsuarioById(int codigo) {
-        System.out.println(usuarioDao.MostrarUsuarioById(codigo).getCodigo() + " - ");
-        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getIdentificacion() + " - ");
-        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getNombre() + " - ");
-        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getEmail() + " - ");
-        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getPassword() + " - ");
-        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getPerfilDto().getId_perfil() + " - ");
-        System.out.println(usuarioDao.MostrarUsuarioById(codigo).getPerfilDto().getPerfil());
-
-    }
-
-    public static void ingresarProfesor(String cedula, String nombre) {
-        profesorDto.setCedula(cedula);
-        profesorDto.setNombre(nombre);
-        profesorDto.setTelefono("123445123");
-        profesorDto.setEmail("Jose.16@gmail.com");
-        profesorDto.setTitulo("El que juega con las bolas");
-
-        if (profesorDao.insertProfesor(profesorDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarProfesores() {
-        //Listar profesores
-        profesorDao.listarProfesores().forEach((profesor) -> {
-            System.out.print(profesor.getCedula() + " - ");
-            System.out.print(profesor.getNombre() + " - ");
-            System.out.print(profesor.getTelefono() + " - ");
-            System.out.print(profesor.getEmail() + " - ");
-            System.out.println(profesor.getTitulo());
-        });
-    }
-
-    public static void listarClase() {
-        claseDao.listarClases().forEach((clase) -> {
-            System.out.print(clase.getId_clase() + " - ");
-            System.out.print(clase.getGrupo() + " - ");
-            System.out.print(clase.getNumeroclases() + " - ");
-            System.out.print(clase.getFechainicio() + " - ");
-            System.out.print(clase.getFechafin() + " - ");
-            System.out.print(clase.getEstado() + " - ");
-            System.out.print(clase.getProgramaDto().getId_programa() + " - ");
-            System.out.println(clase.getProgramaDto().getNombre());
-
-        });
-    }
-
-    public static void insertPrograma(String nombre) {
-
-        //ingresar programa
-        escuelaDto.setId_escuela(1);
-        programaDto.setEscuelaDto(escuelaDto);
-
-        programaDto.setNombre(nombre);
-        programaDto.setEdad("14 a 15");
-
-        sedeDto.setId_sede(1);
-        programaDto.setSedeDto(sedeDto);
-
-        programaDto.setCupos(10);
-        programaDto.setCosto(10000);
-        programaDto.setFechainicio("2014-10-10");
-        programaDto.setFechafin("2015-02-10");
-        programaDto.setHorario("En el dia");
-        programaDto.setEstado(1);
-
-        if (programaDao.insertPrograma(programaDto)) {
-            System.out.println("Nice");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarPrograma() {
-        programaDao.listarProgramas().forEach((programa) -> {
-            System.out.print(programa.getId_programa() + " - ");
-            System.out.print(programa.getEscuelaDto().getEscuela() + " - ");
-            System.out.print(programa.getNombre() + " - ");
-            System.out.print(programa.getEdad() + " - ");
-            System.out.print(programa.getSedeDto().getNombre() + " - ");
-            System.out.print(programa.getCupos() + " - ");
-            System.out.print(programa.getCosto() + " - ");
-            System.out.print(programa.getFechainicio() + " - ");
-            System.out.print(programa.getFechafin() + " - ");
-            System.out.print(programa.getHorario() + " - ");
-            System.out.println(programa.getEstado());
-        });
-    }
-
-    public static void insertAsistenciaProfesor(String cedula, int clase) {
-
-        profesorDto.setCedula(cedula);
-        asisprofeDto.setProfesorDto(profesorDto);
-
-        claseDto.setId_clase(clase);
-        asisprofeDto.setClaseDto(claseDto);
-
-        asisprofeDto.setFecha("2020-11-09");
-        asisprofeDto.setAsistencia(1);
-
-        if (asisprofeDao.insertAsistenciaProfesor(asisprofeDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarAsistenciaProfesor() {
-
-        asisprofeDao.listaAsistenciaProfesores().forEach((asisProfe) -> {
-            System.out.print(asisProfe.getProfesorDto().getCedula() + " - ");
-            System.out.print(asisProfe.getProfesorDto().getNombre() + " - ");
-
-            System.out.print(asisProfe.getClaseDto().getGrupo() + " - ");
-            System.out.print(asisProfe.getClaseDto().getNumeroclases() + " - ");
-            System.out.println(asisProfe.getAsistencia());
-        });
-    }
-
-    public static void insertGenero(String genero) {
-        generoDto.setGenero(genero);
-
-        if (generoDao.insertGenero(generoDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarGeneros() {
-        generoDao.listarGeneros().forEach((genero) -> {
-            System.out.print(genero.getId_genero() + " - ");
-            System.out.println(genero.getGenero());
-        });
-    }
-
-    public static void insertPoblacion(String poblacion) {
-        //Ingresar poblaciones
-        poblacionDto.setPoblacion(poblacion);
-
-        if (poblacionDao.insertPoblacion(poblacionDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarPoblaciones() {
-        //Listar poblaciones
-        poblacionDao.listarPoblaciones().forEach((poblaciones) -> {
-            System.out.print(poblaciones.getId_problacion() + " - ");
-            System.out.println(poblaciones.getPoblacion());
-        });
-    }
-
-    public static void insertEstudiante(String cedula, String nombre) {
-
-        //ingresar estudiantes
-        estudianteDto.setCedula(cedula);
-        estudianteDto.setNombre(nombre);
-        estudianteDto.setDireccion("Aldea de la hoja");
-        estudianteDto.setEmail("Naruto@gmail.com");
-        estudianteDto.setTelefono("10362312");
-        estudianteDto.setFechanacimiento("1998-06-11");
-        estudianteDto.setSisben("Categoria A");
-
-        generoDto.setId_genero(1);
-        estudianteDto.setGeneroDto(generoDto);
-
-        poblacionDto.setId_problacion(1);
-        estudianteDto.setPoblacionDto(poblacionDto);
-
-        if (estudianteDao.insertEstudiantes(estudianteDto)) {
-            System.out.println("Nice");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarEstudiantes() {
-        estudianteDao.listarEstudiantes().forEach((estudiante) -> {
-            System.out.print(estudiante.getCedula() + " - ");
-            System.out.print(estudiante.getNombre() + " - ");
-            System.out.print(estudiante.getDireccion() + " - ");
-            System.out.print(estudiante.getEmail() + " - ");
-            System.out.print(estudiante.getTelefono() + " - ");
-            System.out.print(estudiante.getFechanacimiento() + " - ");
-            System.out.print(estudiante.getSisben() + " - ");
-            System.out.print(estudiante.getGeneroDto().getGenero() + " - ");
-            System.out.println(estudiante.getPoblacionDto().getPoblacion());
-
-        });
-    }
-
-    public static void insertAsistenciaEstudiante(String cedula, int clase) {
-
-        estudianteDto.setCedula(cedula);
-        asisestudianteDto.setEstudianteDto(estudianteDto);
-
-        claseDto.setId_clase(clase);
-        asisestudianteDto.setClaseDto(claseDto);
-
-        asisestudianteDto.setFecha("2020-11-09");
-        asisestudianteDto.setAsistencia(1);
-
-        if (asisestudianteDao.insertAsistenciaEstudiante(asisestudianteDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-
-    }
-
-    public static void listarAsistenciaEstudiantes() {
-
-        asisestudianteDao.listarAsisEstudiantes().forEach((asisEstudiante) -> {
-            System.out.print(asisEstudiante.getEstudianteDto().getCedula() + " - ");
-            System.out.print(asisEstudiante.getEstudianteDto().getNombre() + " - ");
-            System.out.print(asisEstudiante.getClaseDto().getGrupo() + " - ");
-            System.out.print(asisEstudiante.getClaseDto().getNumeroclases() + " - ");
-            System.out.println(asisEstudiante.getAsistencia());
-        });
-
-    }
-
-    public static void insertInscripcion(int programa, String cedula) {
-        estudianteDto.setCedula(cedula);
-        inscripcionDto.setEstudianteDto(estudianteDto);
-
-        programaDto.setId_programa(programa);
-        inscripcionDto.setProgramaDto(programaDto);
-
-        inscripcionDto.setFecha("2021-05-05");
-
-        if (inscripcionDao.insertInscrpcion(inscripcionDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarInscripciones() {
-
-        inscripcionDao.listarInscripciones().forEach((inscripcion) -> {
-            System.out.print(inscripcion.getId_inscripcion() + " - ");
-            System.out.print(inscripcion.getEstudianteDto().getCedula() + " - ");
-            System.out.print(inscripcion.getEstudianteDto().getNombre() + " - ");
-            System.out.print(inscripcion.getProgramaDto().getNombre() + " - ");
-            System.out.println(inscripcion.getFecha());
-
-        });
-    }
-
-    public static void insertMatricula(int inscripcion) {
-        inscripcionDto.setId_inscripcion(inscripcion);
-        matriculaDto.setInscripcionDto(inscripcionDto);
-
-        matriculaDto.setValorpago(59000);
-        matriculaDto.setFecha("2021-05-05");
-
-        if (matriculaDao.insertMatricula(matriculaDto)) {
-            System.out.println("Inserto");
-        } else {
-            System.out.println("Fuck");
-        }
-    }
-
-    public static void listarMatricula() {
-        matriculaDao.listarMatriculas().forEach((matricula) -> {
-            System.out.print(matricula.getId_matricula() + " - ");
-            System.out.print(matricula.getValorpago() + " - ");
-            System.out.print(matricula.getFecha() + " - ");
-            System.out.print(matricula.getInscripcionDto().getEstudianteDto().getCedula() + " - ");
-            System.out.print(matricula.getInscripcionDto().getEstudianteDto().getNombre() + " - ");
-            System.out.print(matricula.getInscripcionDto().getProgramaDto().getId_programa() + " - ");
-            System.out.println(matricula.getInscripcionDto().getProgramaDto().getNombre());
-
-        });
-    }
+//    public static void ingresarPerfil() {
+//        String mensaje = perfilDao.insertPerfil("Administrador") ? "Se insertó" : "No se insertó";
+//        System.out.println(mensaje);
+//    }
+//
+//    public static void listarPerfiles() {
+//        perfilDao.ListarPerfiles().forEach((perfil) -> {
+//            System.out.print(perfil.getId_perfil() + " - ");
+//            System.out.println(perfil.getPerfil());
+//        });
+//    }
+//
+//    public static void ingresarUsuario(String identificacion, int perfil) {
+//
+//        //Ingresar usuarios
+//        usuarioDto.setIdentificacion(identificacion);
+//        usuarioDto.setNombre("James Osorio Florez");
+//        usuarioDto.setEmail("OssRezz.13@gmail.com");
+//        usuarioDto.setPassword("1234");
+//        perfilDto.setId_perfil(perfil);
+//        usuarioDto.setPerfilDto(perfilDto);
+//
+//        if (usuarioDao.insertUsuario(usuarioDto)) {
+//            System.out.println("Inserto");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void actualizarUsuario() {
+//        //Ingresar usuarios
+//        usuarioDto.setCodigo(1000);
+//        usuarioDto.setIdentificacion("1036545234");
+//        usuarioDto.setNombre("Camila Andres Ruedas Toro");
+//        usuarioDto.setEmail("Galeria.10@gmail.com");
+//        usuarioDto.setPassword("1234");
+//        perfilDto.setId_perfil(2);
+//        usuarioDto.setPerfilDto(perfilDto);
+//
+//        if (usuarioDao.actualizarUsuario(usuarioDto)) {
+//            System.out.println("Actualizo");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void eliminarUsuario(int codigo) {
+//        if (usuarioDao.eliminarUsuario(codigo)) {
+//            System.out.println("Elimino");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarUsuario() {
+//        usuarioDao.listarUsuarios().forEach((usuario) -> {
+//            System.out.println(usuario.getCodigo() + " - ");
+//            System.out.print(usuario.getIdentificacion() + " - ");
+//            System.out.print(usuario.getNombre() + " - ");
+//            System.out.print(usuario.getEmail() + " - ");
+//            System.out.print(usuario.getPassword() + " - ");
+//            System.out.print(usuario.getPerfilDto().getId_perfil() + " - ");
+//            System.out.println(usuario.getPerfilDto().getPerfil());
+//        });
+//    }
+//
+//    public static void listarUsuarioById(int codigo) {
+//        System.out.println(usuarioDao.MostrarUsuarioById(codigo).getCodigo() + " - ");
+//        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getIdentificacion() + " - ");
+//        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getNombre() + " - ");
+//        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getEmail() + " - ");
+//        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getPassword() + " - ");
+//        System.out.print(usuarioDao.MostrarUsuarioById(codigo).getPerfilDto().getId_perfil() + " - ");
+//        System.out.println(usuarioDao.MostrarUsuarioById(codigo).getPerfilDto().getPerfil());
+//
+//    }
+//
+//    public static void ingresarProfesor(String cedula, String nombre) {
+//        profesorDto.setCedula(cedula);
+//        profesorDto.setNombre(nombre);
+//        profesorDto.setTelefono("123445123");
+//        profesorDto.setEmail("Jose.16@gmail.com");
+//        profesorDto.setTitulo("El que juega con las bolas");
+//
+//        if (profesorDao.insertProfesor(profesorDto)) {
+//            System.out.println("Inserto");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarProfesores() {
+//        //Listar profesores
+//        profesorDao.listarProfesores().forEach((profesor) -> {
+//            System.out.print(profesor.getCedula() + " - ");
+//            System.out.print(profesor.getNombre() + " - ");
+//            System.out.print(profesor.getTelefono() + " - ");
+//            System.out.print(profesor.getEmail() + " - ");
+//            System.out.println(profesor.getTitulo());
+//        });
+//    }
+//
+//    public static void listarClase() {
+//        claseDao.listarClases().forEach((clase) -> {
+//            System.out.print(clase.getId_clase() + " - ");
+//            System.out.print(clase.getGrupo() + " - ");
+//            System.out.print(clase.getNumeroclases() + " - ");
+//            System.out.print(clase.getFechainicio() + " - ");
+//            System.out.print(clase.getFechafin() + " - ");
+//            System.out.print(clase.getEstado() + " - ");
+//            System.out.print(clase.getProgramaDto().getId_programa() + " - ");
+//            System.out.println(clase.getProgramaDto().getNombre());
+//
+//        });
+//    }
+//
+//    public static void insertPrograma(String nombre) {
+//
+//        //ingresar programa
+//        escuelaDto.setId_escuela(1);
+//        programaDto.setEscuelaDto(escuelaDto);
+//
+//        programaDto.setNombre(nombre);
+//        programaDto.setEdad("14 a 15");
+//
+//        sedeDto.setId_sede(1);
+//        programaDto.setSedeDto(sedeDto);
+//
+//        programaDto.setCupos(10);
+//        programaDto.setCosto(10000);
+//        programaDto.setFechainicio("2014-10-10");
+//        programaDto.setFechafin("2015-02-10");
+//        programaDto.setHorario("En el dia");
+//        programaDto.setEstado(1);
+//
+//        if (programaDao.insertPrograma(programaDto)) {
+//            System.out.println("Nice");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarPrograma() {
+//        programaDao.listarProgramas().forEach((programa) -> {
+//            System.out.print(programa.getId_programa() + " - ");
+//            System.out.print(programa.getEscuelaDto().getEscuela() + " - ");
+//            System.out.print(programa.getNombre() + " - ");
+//            System.out.print(programa.getEdad() + " - ");
+//            System.out.print(programa.getSedeDto().getNombre() + " - ");
+//            System.out.print(programa.getCupos() + " - ");
+//            System.out.print(programa.getCosto() + " - ");
+//            System.out.print(programa.getFechainicio() + " - ");
+//            System.out.print(programa.getFechafin() + " - ");
+//            System.out.print(programa.getHorario() + " - ");
+//            System.out.println(programa.getEstado());
+//        });
+//    }
+//
+//    public static void insertAsistenciaProfesor(String cedula, int clase) {
+//
+//        profesorDto.setCedula(cedula);
+//        asisprofeDto.setProfesorDto(profesorDto);
+//
+//        claseDto.setId_clase(clase);
+//        asisprofeDto.setClaseDto(claseDto);
+//
+//        asisprofeDto.setFecha("2020-11-09");
+//        asisprofeDto.setAsistencia(1);
+//
+//        if (asisprofeDao.insertAsistenciaProfesor(asisprofeDto)) {
+//            System.out.println("Inserto");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarAsistenciaProfesor() {
+//
+//        asisprofeDao.listaAsistenciaProfesores().forEach((asisProfe) -> {
+//            System.out.print(asisProfe.getProfesorDto().getCedula() + " - ");
+//            System.out.print(asisProfe.getProfesorDto().getNombre() + " - ");
+//
+//            System.out.print(asisProfe.getClaseDto().getGrupo() + " - ");
+//            System.out.print(asisProfe.getClaseDto().getNumeroclases() + " - ");
+//            System.out.println(asisProfe.getAsistencia());
+//        });
+//    }
+//
+//    public static void insertGenero(String genero) {
+//        generoDto.setGenero(genero);
+//
+//        if (generoDao.insertGenero(generoDto)) {
+//            System.out.println("Inserto");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarGeneros() {
+//        generoDao.listarGeneros().forEach((genero) -> {
+//            System.out.print(genero.getId_genero() + " - ");
+//            System.out.println(genero.getGenero());
+//        });
+//    }
+//
+//    public static void insertPoblacion(String poblacion) {
+//        //Ingresar poblaciones
+//        poblacionDto.setPoblacion(poblacion);
+//
+//        if (poblacionDao.insertPoblacion(poblacionDto)) {
+//            System.out.println("Inserto");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarPoblaciones() {
+//        //Listar poblaciones
+//        poblacionDao.listarPoblaciones().forEach((poblaciones) -> {
+//            System.out.print(poblaciones.getId_problacion() + " - ");
+//            System.out.println(poblaciones.getPoblacion());
+//        });
+//    }
+//
+//    public static void insertEstudiante(String cedula, String nombre) {
+//
+//        //ingresar estudiantes
+//        estudianteDto.setCedula(cedula);
+//        estudianteDto.setNombre(nombre);
+//        estudianteDto.setDireccion("Aldea de la hoja");
+//        estudianteDto.setEmail("Naruto@gmail.com");
+//        estudianteDto.setTelefono("10362312");
+//        estudianteDto.setFechanacimiento("1998-06-11");
+//        estudianteDto.setSisben("Categoria A");
+//
+//        generoDto.setId_genero(1);
+//        estudianteDto.setGeneroDto(generoDto);
+//
+//        poblacionDto.setId_problacion(1);
+//        estudianteDto.setPoblacionDto(poblacionDto);
+//
+//        if (estudianteDao.insertEstudiantes(estudianteDto)) {
+//            System.out.println("Nice");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarEstudiantes() {
+//        estudianteDao.listarEstudiantes().forEach((estudiante) -> {
+//            System.out.print(estudiante.getCedula() + " - ");
+//            System.out.print(estudiante.getNombre() + " - ");
+//            System.out.print(estudiante.getDireccion() + " - ");
+//            System.out.print(estudiante.getEmail() + " - ");
+//            System.out.print(estudiante.getTelefono() + " - ");
+//            System.out.print(estudiante.getFechanacimiento() + " - ");
+//            System.out.print(estudiante.getSisben() + " - ");
+//            System.out.print(estudiante.getGeneroDto().getGenero() + " - ");
+//            System.out.println(estudiante.getPoblacionDto().getPoblacion());
+//
+//        });
+//    }
+//
+//    public static void insertAsistenciaEstudiante(String cedula, int clase) {
+//
+//        estudianteDto.setCedula(cedula);
+//        asisestudianteDto.setEstudianteDto(estudianteDto);
+//
+//        claseDto.setId_clase(clase);
+//        asisestudianteDto.setClaseDto(claseDto);
+//
+//        asisestudianteDto.setFecha("2020-11-09");
+//        asisestudianteDto.setAsistencia(1);
+//
+//        if (asisestudianteDao.insertAsistenciaEstudiante(asisestudianteDto)) {
+//            System.out.println("Inserto");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//
+//    }
+//
+//    public static void listarAsistenciaEstudiantes() {
+//
+//        asisestudianteDao.listarAsisEstudiantes().forEach((asisEstudiante) -> {
+//            System.out.print(asisEstudiante.getEstudianteDto().getCedula() + " - ");
+//            System.out.print(asisEstudiante.getEstudianteDto().getNombre() + " - ");
+//            System.out.print(asisEstudiante.getClaseDto().getGrupo() + " - ");
+//            System.out.print(asisEstudiante.getClaseDto().getNumeroclases() + " - ");
+//            System.out.println(asisEstudiante.getAsistencia());
+//        });
+//
+//    }
+//
+//    public static void insertInscripcion(int programa, String cedula) {
+//        estudianteDto.setCedula(cedula);
+//        inscripcionDto.setEstudianteDto(estudianteDto);
+//
+//        programaDto.setId_programa(programa);
+//        inscripcionDto.setProgramaDto(programaDto);
+//
+//        inscripcionDto.setFecha("2021-05-05");
+//
+//        if (inscripcionDao.insertInscrpcion(inscripcionDto)) {
+//            System.out.println("Inserto");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarInscripciones() {
+//
+//        inscripcionDao.listarInscripciones().forEach((inscripcion) -> {
+//            System.out.print(inscripcion.getId_inscripcion() + " - ");
+//            System.out.print(inscripcion.getEstudianteDto().getCedula() + " - ");
+//            System.out.print(inscripcion.getEstudianteDto().getNombre() + " - ");
+//            System.out.print(inscripcion.getProgramaDto().getNombre() + " - ");
+//            System.out.println(inscripcion.getFecha());
+//
+//        });
+//    }
+//
+//    public static void insertMatricula(int inscripcion) {
+//        inscripcionDto.setId_inscripcion(inscripcion);
+//        matriculaDto.setInscripcionDto(inscripcionDto);
+//
+//        matriculaDto.setValorpago(59000);
+//        matriculaDto.setFecha("2021-05-05");
+//
+//        if (matriculaDao.insertMatricula(matriculaDto)) {
+//            System.out.println("Inserto");
+//        } else {
+//            System.out.println("Fuck");
+//        }
+//    }
+//
+//    public static void listarMatricula() {
+//        matriculaDao.listarMatriculas().forEach((matricula) -> {
+//            System.out.print(matricula.getId_matricula() + " - ");
+//            System.out.print(matricula.getValorpago() + " - ");
+//            System.out.print(matricula.getFecha() + " - ");
+//            System.out.print(matricula.getInscripcionDto().getEstudianteDto().getCedula() + " - ");
+//            System.out.print(matricula.getInscripcionDto().getEstudianteDto().getNombre() + " - ");
+//            System.out.print(matricula.getInscripcionDto().getProgramaDto().getId_programa() + " - ");
+//            System.out.println(matricula.getInscripcionDto().getProgramaDto().getNombre());
+//
+//        });
+//    }
 
     /* EVENTOS
         EventoDto eventoDto = new EventoDto();
